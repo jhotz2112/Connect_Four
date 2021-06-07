@@ -4,28 +4,18 @@ const colors = {
     '-1' : "black",
     '0' : "white"
 }
-
-const winningArrays = [
-    
-  ]
-
 // const sounds
+
 /*----- app's state (variables) -----*/
 let board;
-let playerTurn;
-let winner;
-// /*----- cached element references -----*/
-//button 1
-var button = document.createElement("button1");
-button.innerHTML = " ";
+let playerTurn; // 1, -1
+let winner; // null, 1, -1, "T"
 
-var button1 = document.getElementsByTagName("body")[0];
-button1.appendChild(button);
+ /*----- cached element references -----*/
+const colBtns = [...document.querySelectorAll("#column-buttons > button")];
 
-// /*----- event listeners -----*/
-button1.addEventListener ("click", function() {
-    alert("did something");
-  });
+ /*----- event listeners -----*/
+document.getElementById("column-buttons").addEventListener("click", handleMove)
 
 // /*----- functions -----*/
 init();
@@ -38,9 +28,12 @@ function init() {
         [0, 0, 0, 0, 0, 0],  // Column 4
         [0, 0, 0, 0, 0, 0],  // Column 5
         [0, 0, 0, 0, 0, 0],  // Column 6
-      ];
-      render();
+    ];
+    playerTurn = 1;
+    winner = null;
+    render();
 }
+
 function render() {
     // itterate over each column in  board
     board.forEach((column, columnidx) => {
@@ -49,37 +42,27 @@ function render() {
             // find specific cell using columnidx and cellidx
             let div = document.getElementById(`c${columnidx}r${cellidx}`);
             div.style.backgroundColor = colors[cell];
-        })
+        });
+        colBtns[columnidx].style.visibility = column.includes(0) ? "visible" : "hidden";
     });
 }
 
-function checkBoard() {
-    for(let i = 0; i < winningArrays.length; i++) {
-       const square1 = squares[winningArrays[i][0]]
-       const square2 = squares[winningArrays[i][1]]
-       const square3 = squares[winningArrays[i][2]]
-       const square4 = squares[winningArrays[i][3]]
-    }
+//win logic (not done)
+function getWinner(colIdx, rowIdx) {
+  
+        
+}
 
-        if (
-            square1.classList.contains("red") &&
-            square2.classList.contains("red") &&
-            square3.classList.contains("red") &&
-            square4.classList.contains("red")
-        )
-        {
-         result.innerHTML = 'Red Wins!'
-        }
-        if (
-            square1.classList.contains("black") &&
-            square2.classList.contains("black") &&
-            square3.classList.contains("black") &&
-            square4.classList.contains("black")
-        )
-        {
-        result.innerHTML = 'Black Wins!'
-        } else {
-            result.innerHTML = 'Tie Game'
-        }
-    }
+function handleMove(evt) {
+    // update all impacted state
+    const colIdx = colBtns.indexOf(evt.target);
+    if (colIdx === -1 || winner) return;
+    const colArr = board[colIdx];
+    const rowIdx = colArr.indexOf(0);
+    if (rowIdx === -1) return;
+    colArr[rowIdx] = playerTurn;
+    playerTurn *= -1;
+    winner = getWinner(colIdx, rowIdx);
+    render();
+}
 

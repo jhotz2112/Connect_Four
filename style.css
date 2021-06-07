@@ -3,10 +3,12 @@
 }
 body {
     height: 100vh;
+    background-color: lightgray
+    s
 }
 #board {
     display: grid;
-    background-color: yellow;
+    background-color: rgb(245, 186, 37);
     grid-template-rows: repeat(6, 10vmin);
     grid-template-columns: repeat(7, 10vmin);
     gap: 1vmin;
@@ -19,7 +21,7 @@ body {
     background-color: white;
     align-content: center;
 }
-button {
+#column-buttons > button {
   height: 4vmin;
   width: 8vmin;
   margin: .8vmin;
@@ -28,4 +30,13 @@ button {
   vertical-align: middle;
   color: green;
   border-radius: 20%;
+}
+
+#column-buttons {
+    display: grid;
+    background-color: rgb(245, 186, 37);
+    grid-template-rows: 10vmin;
+    grid-template-columns: repeat(7, 10vmin);
+    width: 77vmin;
+    gap: 1vmin;
 }
