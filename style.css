@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    height: 100vh;
+}
+#board {
+    display: grid;
+    background-color: yellow;
+    grid-template-rows: repeat(6, 10vmin);
+    grid-template-columns: repeat(7, 10vmin);
+    gap: 1vmin;
+    height: 67vmin;
+    width: 77vmin;
+}
+#board > div {
+    border-radius: 50%;
+    border: 2px solid black;
+    background-color: white;
+    align-content: center;
+}
+button {
+  height: 4vmin;
+  width: 8vmin;
+  margin: .8vmin;
+  font-size: 1.25vmin;
+  text-align:center;
+  vertical-align: middle;
+  color: green;
+  border-radius: 20%;
+}
