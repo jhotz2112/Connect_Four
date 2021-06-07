@@ -4,21 +4,29 @@ const colors = {
     '-1' : "black",
     '0' : "white"
 }
+
+const winningArrays = [
+    
+  ]
+
 // const sounds
 /*----- app's state (variables) -----*/
 let board;
 let playerTurn;
 let winner;
 // /*----- cached element references -----*/
-// playerMoves
+//button 1
+var button = document.createElement("button1");
+button.innerHTML = " ";
+
+var button1 = document.getElementsByTagName("body")[0];
+button1.appendChild(button);
+
 // /*----- event listeners -----*/
-document.getElementById("button1");
-document.getElementById("button2");
-document.getElementById("button3");
-document.getElementById("button4");
-document.getElementById("button5");
-document.getElementById("button6");
-document.getElementById("button7");
+button1.addEventListener ("click", function() {
+    alert("did something");
+  });
+
 // /*----- functions -----*/
 init();
 function init() {
@@ -44,3 +52,34 @@ function render() {
         })
     });
 }
+
+function checkBoard() {
+    for(let i = 0; i < winningArrays.length; i++) {
+       const square1 = squares[winningArrays[i][0]]
+       const square2 = squares[winningArrays[i][1]]
+       const square3 = squares[winningArrays[i][2]]
+       const square4 = squares[winningArrays[i][3]]
+    }
+
+        if (
+            square1.classList.contains("red") &&
+            square2.classList.contains("red") &&
+            square3.classList.contains("red") &&
+            square4.classList.contains("red")
+        )
+        {
+         result.innerHTML = 'Red Wins!'
+        }
+        if (
+            square1.classList.contains("black") &&
+            square2.classList.contains("black") &&
+            square3.classList.contains("black") &&
+            square4.classList.contains("black")
+        )
+        {
+        result.innerHTML = 'Black Wins!'
+        } else {
+            result.innerHTML = 'Tie Game'
+        }
+    }
+
