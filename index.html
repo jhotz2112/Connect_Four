@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +9,12 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
     <title>Connect Four</title>
 </head>
+
 <body>
     <h2>Connect Four!</h2>
-    <h2 id="message"></h2>
-    <section id="column-buttons"> 
+    <h4>Click the black buttons to play!</h4>
+    <h2 id="msg"></h2>
+    <section id="column-buttons">
         <button></button>
         <button></button>
         <button></button>
@@ -19,8 +22,8 @@
         <button></button>
         <button></button>
         <button></button>
-    </section> 
-    
+    </section>
+
     <section id="board">
         <div id="c0r5"></div>
         <div id="c1r5"></div>
@@ -71,8 +74,10 @@
         <div id="c6r0"></div>
     </section>
     <section class="rstgame-music">
-        <button id="reset-game">Reset Game</button> 
-        <button id="music">Pause Music</button> 
+        <button id="reset-game">Reset Game</button>
     </section>
+    <input id="checkbox" type="checkbox">Mood Music
+    <audio id="bg-player" src="https://freesound.org/s/574923/" loop>
 </body>
+
 </html>

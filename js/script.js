@@ -1,10 +1,9 @@
 /*----- constants -----*/
 const colors = {
-    '1' : "red",
-    '-1' : "black",
-    '0' : "white"
+    '1': "red",
+    '-1': "black",
+    '0': "white"
 }
-// const sounds
 
 /*----- app's state (variables) -----*/
 let board;
@@ -12,15 +11,21 @@ let playerTurn; // 1, -1
 let winner; // null, 1, -1, "T"
 let turnsTaken;
 
- /*----- cached element references -----*/
+/*----- cached element references -----*/
 const colBtns = [...document.querySelectorAll("#column-buttons > button")];
 const rstBtn = document.getElementById("reset-game");
+const headerEl = document.getElementById("msg");
+const audio = document.getElementById("bg-player");
+const checkbox = document.getElementById("checkbox");
 
- /*----- event listeners -----*/
+/*----- event listeners -----*/
 document.getElementById("column-buttons").addEventListener("click", handleMove);
 document.getElementById("reset-game").addEventListener("click", init);
-
+document.querySelector("#checkbox").addEventListener("click", toggleSound);
 // /*----- functions -----*/
+function toggleSound() {
+    checkbox.checked ? audio.play() : audio.pause();
+}
 init();
 function init() {
     board = [
@@ -62,67 +67,73 @@ function handleMove(evt) {
     playerTurn *= -1;
     winner = getWinner(colIdx, rowIdx);
     render();
+    //tie game, log result
+    if (winner === 'T') {
+        msg.innerText = "It's a Tie!!!";
+    } else if (winner) {
+        // Winner = truthy?, log winner
+        msg.innerText = `${winner === 1 ? 'RED' : 'BLACK'} Wins!!!`;
+    } else {
+        //no winner? continue game
+        headerEl.innerHTML = `${playerTurn === 1 ? 'RED' : 'BLACK'}'s turn!`;
+    }
 }
-
-//****** /win logic (not done)/ ********
-
-//check 3 different conditions
 //Win logic
 function getWinner() {
     //check for tie
     if (turnsTaken >= 42) return winner = "T";
     //check every collumn for a winner, if so return the winner
     for (let colIdx = 0; colIdx <= 6; colIdx++) {
-      winner = checkCol(colIdx);
-      if (winner) break;
+        winner = checkCol(colIdx);
+        if (winner) break;
     }
     return winner;
-  }
-  //check Col at it's index within the board 2d array
-  function checkCol(colIdx) {
+}
+//check Col at it's index within the board 2d array
+function checkCol(colIdx) {
     const colArr = board[colIdx];
     // for every row in the col: check for winner and set var winner = winning color
     for (let rowIdx = 0; rowIdx < colArr.length; rowIdx++) {
-      let winner = checkVer(colArr, rowIdx) || checkHori(colIdx, rowIdx)
-        || checkDiag(colIdx, rowIdx, 1) || checkDiag(colIdx, rowIdx, -1);
-      if (winner) return winner;
+        let winner = checkVer(colArr, rowIdx) || checkHori(colIdx, rowIdx)
+            || checkDiag(colIdx, rowIdx, 1) || checkDiag(colIdx, rowIdx, -1);
+        if (winner) return winner;
     }
     return null;
 }
-  function checkDiag(colIdx, rowIdx, dir) {
+function checkDiag(colIdx, rowIdx, dir) {
     // Boundary check
     if (dir > 0 && colIdx > 3 || dir > 0 && rowIdx > 2) return null;
     if (dir < 0 && colIdx > 3 || dir < 0 && rowIdx < 3) return null;
     if (Math.abs(board[colIdx][rowIdx] + board[colIdx + 1][rowIdx + dir]
         + board[colIdx + 2][rowIdx + dir * 2] + board[colIdx + 3][rowIdx + dir * 3]) === 4) {
-      return board[colIdx][rowIdx];
+        return board[colIdx][rowIdx];
     } else {
-      return null;
+        return null;
     }
 }
-  function checkHori(colIdx, rowIdx) {
+function checkHori(colIdx, rowIdx) {
     // Boundary check
     if (colIdx > 3) return null;
     //add the value of all spaces to the right of colIdx and look for +4 or -4
     //then return the value of +4 using Math.abs to get a winner
     if (Math.abs(board[colIdx][rowIdx] + board[colIdx + 1][rowIdx]
         + board[colIdx + 2][rowIdx] + board[colIdx + 3][rowIdx]) === 4) {
-      return board[colIdx][rowIdx];
+        return board[colIdx][rowIdx];
     } else {
-      return null;
+        return null;
     }
-  }
-  function checkVer(colArr, rowIdx) {
+}
+function checkVer(colArr, rowIdx) {
     // Boundary check
     if (rowIdx > 2) return null;
     //add the value of all spaces above row indx and look for +4 or -4
     //then return the value of +4 using Math.abs to get a winner
     if (Math.abs(colArr[rowIdx] + colArr[rowIdx + 1] + colArr[rowIdx + 2] + colArr[rowIdx + 3]) === 4) {
-      return colArr[rowIdx];
+        return colArr[rowIdx];
     } else {
-      return null;
+        return null;
     }
-  }
+}
 
 function handleRstBtnText() {
     if (winner) {

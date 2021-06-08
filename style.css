@@ -14,7 +14,10 @@ body {
 h2 {
     text-align: center;
     color: black;
-    margin-top: 1vmin;
+}
+
+h4 {
+    color: red;
 }
 
 #board {
@@ -59,12 +62,12 @@ h2 {
     gap: 1.2vmin;    
 }
 
-#rstgame-music > button {
+.rstgame-music > button {
     background-color: black;
     color: white;
 }
 
-#rstgame-music > button:hover {
+.rstgame-music > button:hover {
     background-color: white;
     color: black;
 }
