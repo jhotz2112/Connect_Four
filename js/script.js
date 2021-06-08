@@ -47,12 +47,6 @@ function render() {
     });
 }
 
-//win logic (not done)
-function getWinner(colIdx, rowIdx) {
-  
-        
-}
-
 function handleMove(evt) {
     // update all impacted state
     const colIdx = colBtns.indexOf(evt.target);
@@ -66,3 +60,15 @@ function handleMove(evt) {
     render();
 }
 
+//****** /win logic (not done)/ ********
+
+//check 3 different conditions
+function getWinner(colIdx, rowIdx) {  
+    // function checkHori([colIdx], [rowIdx]){
+    //     for(let i = -3, i < 0, ++i) {
+    //         if ([colIdx + i][rowIdx] === ([colIdx], [rowIdx]) && [colIdx + i + 1][rowIdx] === ([colIdx + i + 1], [rowIdx]) && [colIdx + i + 2][rowIdx] === [colIdx][roxIdx]){
+    //             console.log('Winner');
+    //         }
+    //     }
+    // }
+    }
