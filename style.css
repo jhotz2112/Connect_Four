@@ -6,20 +6,20 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-color: rgb(100, 94, 94);
+    background-color: white;
     justify-content: center;
     align-items: center;
 }
 
 h2 {
     text-align: center;
-    color: white;
+    color: black;
     margin-top: 1vmin;
 }
 
 #board {
     display: grid;
-    background-color: rgb(236, 199, 103);
+    background-color: rgb(214, 214, 183);
     grid-template-rows: repeat(6, 10vmin);
     grid-template-columns: repeat(7, 10vmin);
     gap: 1vmin;
@@ -43,15 +43,28 @@ h2 {
   font-size: 1.25vmin;
   text-align:center;
   vertical-align: middle;
-  color: green;
+  background-color: black;
   border-radius: 20%;
 }
 
+#column-buttons > button:hover {
+    background-color: white;
+  }
+
 #column-buttons {
     display: grid;
-    background-color: rgb(236, 199, 103);
     grid-template-rows: 10vmin;
     grid-template-columns: repeat(7, 10vmin);
     width: 77vmin;
-    gap: 1vmin;    
+    gap: 1.2vmin;    
+}
+
+#rstgame-music > button {
+    background-color: black;
+    color: white;
+}
+
+#rstgame-music > button:hover {
+    background-color: white;
+    color: black;
 }

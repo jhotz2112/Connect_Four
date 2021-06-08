@@ -10,12 +10,15 @@ const colors = {
 let board;
 let playerTurn; // 1, -1
 let winner; // null, 1, -1, "T"
+let turnsTaken;
 
  /*----- cached element references -----*/
 const colBtns = [...document.querySelectorAll("#column-buttons > button")];
+const rstBtn = document.getElementById("reset-game");
 
  /*----- event listeners -----*/
-document.getElementById("column-buttons").addEventListener("click", handleMove)
+document.getElementById("column-buttons").addEventListener("click", handleMove);
+document.getElementById("reset-game").addEventListener("click", init);
 
 // /*----- functions -----*/
 init();
@@ -45,6 +48,7 @@ function render() {
         });
         colBtns[columnidx].style.visibility = column.includes(0) ? "visible" : "hidden";
     });
+    handleRstBtnText();
 }
 
 function handleMove(evt) {
@@ -63,12 +67,67 @@ function handleMove(evt) {
 //****** /win logic (not done)/ ********
 
 //check 3 different conditions
-function getWinner(colIdx, rowIdx) {  
-    // function checkHori([colIdx], [rowIdx]){
-    //     for(let i = -3, i < 0, ++i) {
-    //         if ([colIdx + i][rowIdx] === ([colIdx], [rowIdx]) && [colIdx + i + 1][rowIdx] === ([colIdx + i + 1], [rowIdx]) && [colIdx + i + 2][rowIdx] === [colIdx][roxIdx]){
-    //             console.log('Winner');
-    //         }
-    //     }
-    // }
+//Win logic
+function getWinner() {
+    //check for tie
+    if (turnsTaken >= 42) return winner = "T";
+    //check every collumn for a winner, if so return the winner
+    for (let colIdx = 0; colIdx <= 6; colIdx++) {
+      winner = checkCol(colIdx);
+      if (winner) break;
     }
+    return winner;
+  }
+  //check Col at it's index within the board 2d array
+  function checkCol(colIdx) {
+    const colArr = board[colIdx];
+    // for every row in the col: check for winner and set var winner = winning color
+    for (let rowIdx = 0; rowIdx < colArr.length; rowIdx++) {
+      let winner = checkVer(colArr, rowIdx) || checkHori(colIdx, rowIdx)
+        || checkDiag(colIdx, rowIdx, 1) || checkDiag(colIdx, rowIdx, -1);
+      if (winner) return winner;
+    }
+    return null;
+}
+  function checkDiag(colIdx, rowIdx, dir) {
+    // Boundary check
+    if (dir > 0 && colIdx > 3 || dir > 0 && rowIdx > 2) return null;
+    if (dir < 0 && colIdx > 3 || dir < 0 && rowIdx < 3) return null;
+    if (Math.abs(board[colIdx][rowIdx] + board[colIdx + 1][rowIdx + dir]
+        + board[colIdx + 2][rowIdx + dir * 2] + board[colIdx + 3][rowIdx + dir * 3]) === 4) {
+      return board[colIdx][rowIdx];
+    } else {
+      return null;
+    }
+}
+  function checkHori(colIdx, rowIdx) {
+    // Boundary check
+    if (colIdx > 3) return null;
+    //add the value of all spaces to the right of colIdx and look for +4 or -4
+    //then return the value of +4 using Math.abs to get a winner
+    if (Math.abs(board[colIdx][rowIdx] + board[colIdx + 1][rowIdx]
+        + board[colIdx + 2][rowIdx] + board[colIdx + 3][rowIdx]) === 4) {
+      return board[colIdx][rowIdx];
+    } else {
+      return null;
+    }
+  }
+  function checkVer(colArr, rowIdx) {
+    // Boundary check
+    if (rowIdx > 2) return null;
+    //add the value of all spaces above row indx and look for +4 or -4
+    //then return the value of +4 using Math.abs to get a winner
+    if (Math.abs(colArr[rowIdx] + colArr[rowIdx + 1] + colArr[rowIdx + 2] + colArr[rowIdx + 3]) === 4) {
+      return colArr[rowIdx];
+    } else {
+      return null;
+    }
+  }
+
+function handleRstBtnText() {
+    if (winner) {
+        rstBtn.innerText = "Reset Game";
+    } else {
+        rstBtn.innerText = "Surrender!";
+    }
+}
