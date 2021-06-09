@@ -38,6 +38,7 @@ function init() {
         [0, 0, 0, 0, 0, 0],  // Column 6
     ];
     playerTurn = 1;
+    turnsTaken = 0;
     winner = null;
     render();
 }
@@ -54,6 +55,7 @@ function render() {
         colBtns[columnidx].style.visibility = column.includes(0) ? "visible" : "hidden";
     });
     handleRstBtnText();
+    turnsTaken++;
 }
 
 function handleMove(evt) {
@@ -81,7 +83,7 @@ function handleMove(evt) {
 //Win logic
 function getWinner() {
     //check for tie
-    if (turnsTaken >= 42) return winner = "T";
+    if (turnsTaken >= 42) {return winner = "T"};
     //check every collumn for a winner, if so return the winner
     for (let colIdx = 0; colIdx <= 6; colIdx++) {
         winner = checkCol(colIdx);

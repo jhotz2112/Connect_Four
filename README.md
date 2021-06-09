@@ -5,8 +5,6 @@ https://jhotz2112.github.io/Connect_Four/
 Bring back the nostalgia of childhood with connect four! Connect four has its roots in the classic “paper-and-pencil” game of Tic-Tac-Toe. The object of this game is to get four tokens in a row in any direction, by building off of previous moves made by the players. Originally named “Four in a Row”, the name “Connect Four” was first coined by Milton Bradley Company in 1974. 
 
 
-
-
 Technologies used:
 
     HTML
