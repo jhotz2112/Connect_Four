@@ -11,14 +11,13 @@ body {
     align-items: center;
 }
 
-h2 {
+h1 {
     text-align: center;
     color: black;
 }
 
-h4 {
+h3 {
     color: black;
-
 }
 
 #board {
