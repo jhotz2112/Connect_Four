@@ -26,7 +26,9 @@ document.querySelector("#checkbox").addEventListener("click", toggleSound);
 function toggleSound() {
     checkbox.checked ? audio.play() : audio.pause();
 }
+
 init();
+
 function init() {
     board = [
         [0, 0, 0, 0, 0, 0],  // Column 0
@@ -80,6 +82,7 @@ function handleMove(evt) {
         headerEl.innerHTML = `${playerTurn === 1 ? 'RED' : 'BLACK'}'s turn!`;
     }
 }
+
 //Win logic
 function getWinner() {
     //check for tie
@@ -91,6 +94,7 @@ function getWinner() {
     }
     return winner;
 }
+
 //check Col at it's index within the board 2d array
 function checkCol(colIdx) {
     const colArr = board[colIdx];
@@ -102,6 +106,7 @@ function checkCol(colIdx) {
     }
     return null;
 }
+
 function checkDiag(colIdx, rowIdx, dir) {
     // Boundary check
     if (dir > 0 && colIdx > 3 || dir > 0 && rowIdx > 2) return null;
@@ -113,6 +118,7 @@ function checkDiag(colIdx, rowIdx, dir) {
         return null;
     }
 }
+
 function checkHori(colIdx, rowIdx) {
     // Boundary check
     if (colIdx > 3) return null;
@@ -125,6 +131,7 @@ function checkHori(colIdx, rowIdx) {
         return null;
     }
 }
+
 function checkVer(colArr, rowIdx) {
     // Boundary check
     if (rowIdx > 2) return null;

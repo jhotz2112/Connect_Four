@@ -15,8 +15,8 @@ Bring back the nostalgia of childhood with connect four! Connect four has its ro
     JavaScript
 
 ## Getting Started!
-	Click the black buttons at the top of the gameboard to place a token. Use your wits and previous moves to get four in a row. If you get stuck or you want to give up, click the surrender button to end the game and start over. If you need some music to concentrate, click the “Mood Music” button at the bottom. Good Luck!! May the odds be in your favor!
+Click the black buttons at the top of the gameboard to place a token. Use your wits and previous moves to get four in a row. If you get stuck or you want to give up, click the surrender button to end the game and start over. If you need some music to concentrate, click the “Mood Music” button at the bottom. Good Luck!! May the odds be in your favor!
 
 
 ## Next Steps:
-    In the future, I would like to add AI so the players have the option to play against the computer instead of each other. I would also like to add a music player so the music can be chosen by the players.
+In the future, I would like to add AI so the players have the option to play against the computer instead of each other. I would also like to add a music player so the music can be chosen by the players.
